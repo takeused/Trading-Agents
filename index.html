@@ -286,6 +286,38 @@
       line-height: 1.6;
     }
 
+    /* Filter Pills Style */
+    .filter-wrapper {
+      display: flex;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .filter-pill {
+      background-color: var(--colors-canvas);
+      color: var(--colors-ink);
+      border: 1px solid var(--colors-hairline);
+      padding: 10px 20px;
+      border-radius: var(--rounded-full);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-display);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filter-pill.active {
+      background-color: var(--colors-primary);
+      color: var(--colors-canvas);
+      border-color: var(--colors-primary);
+      box-shadow: 0 4px 12px rgba(0, 75, 255, 0.2);
+    }
+
+    .filter-pill:hover:not(.active) {
+      border-color: var(--colors-ink-deep);
+      background-color: var(--colors-surface-soft);
+    }
+
     /* Footer */
     .footer {
       background-color: var(--colors-canvas);
@@ -337,6 +369,13 @@
       </p>
     </div>
 
+    <!-- Stock Filter Pills -->
+    <div class="filter-wrapper">
+      <button class="filter-pill active" onclick="applyStockFilter('all', event)">전체 종목</button>
+      <button class="filter-pill" onclick="applyStockFilter('samsung', event)">삼성전자</button>
+      <button class="filter-pill" onclick="applyStockFilter('hynix', event)">SK하이닉스</button>
+    </div>
+
     <!-- 포트폴리오 요약 -->
     <div class="overview-row">
       <h2 class="overview-title">🔍 반도체 세그먼트 포지션 요약</h2>
@@ -350,7 +389,7 @@
     <div class="dashboard-grid">
       
       <!-- Samsung Card -->
-      <div class="stock-card" onclick="location.href='samsung_analysis_report.html'">
+      <div class="stock-card" data-stock="samsung" onclick="location.href='samsung_analysis_report.html'">
         <div>
           <div class="card-top">
             <div class="stock-info">
@@ -381,7 +420,7 @@
       </div>
 
       <!-- SK Hynix Card -->
-      <div class="stock-card" onclick="location.href='sk_hynix_analysis_report.html'">
+      <div class="stock-card" data-stock="hynix" onclick="location.href='sk_hynix_analysis_report.html'">
         <div>
           <div class="card-top">
             <div class="stock-info">
@@ -419,5 +458,25 @@
     © 2026 TradingAgents Framework. 본 정보는 AI 분석 리서치용으로 제공되며, 투자의 법적 최종 책임은 전적으로 본인에게 있습니다.
   </footer>
 
+  <script>
+    function applyStockFilter(stock, event) {
+      // Remove active class from all filter pills
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Add active class to clicked pill
+      event.currentTarget.classList.add('active');
+      
+      // Filter cards
+      document.querySelectorAll('.stock-card').forEach(card => {
+        if (stock === 'all' || card.getAttribute('data-stock') === stock) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
