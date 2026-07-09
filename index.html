@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradingAgents AI 투자 포탈 대시보드</title>
+  <!-- Montserrat and Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Meta Commerce Design System Tokens */
+    :root {
+      --colors-canvas: #ffffff;
+      --colors-surface-soft: #f5f7f8;
+      --colors-primary: #004bff; 
+      --colors-primary-deep: #0038c7; 
+      --colors-primary-soft: rgba(0, 75, 255, 0.08);
+      --colors-meta-link: #0064e0;
+      
+      --colors-ink-deep: #0a1317;
+      --colors-ink: #1c2b33;
+      --colors-charcoal: #2a3c46;
+      --colors-slate: #5b6b73;
+      --colors-steel: #8a969c;
+      --colors-stone: #b0b8bc;
+      
+      --colors-hairline: rgba(10, 19, 23, 0.15);
+      --colors-hairline-soft: rgba(10, 19, 23, 0.08);
+      
+      --colors-success: #008060;
+      --colors-attention: #ffc400;
+      --colors-warning: #ffd200;
+      --colors-critical: #e11900;
+      
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+      
+      --rounded-xs: 2px;
+      --rounded-sm: 4px;
+      --rounded-md: 6px;
+      --rounded-lg: 8px;
+      --rounded-xl: 16px;
+      --rounded-xxl: 24px;
+      --rounded-xxxl: 32px;
+      --rounded-full: 100px;
+      
+      --spacing-xxs: 4px;
+      --spacing-xs: 8px;
+      --spacing-md: 12px;
+      --spacing-base: 16px;
+      --spacing-lg: 20px;
+      --spacing-xl: 24px;
+      --spacing-xxl: 32px;
+      --spacing-xxxl: 40px;
+      --spacing-section: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--colors-surface-soft);
+      color: var(--colors-ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      color: var(--colors-ink-deep);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    /* Header Nav */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      height: 64px;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--colors-hairline-soft);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--spacing-xxl);
+    }
+
+    .meta-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: var(--colors-ink-deep);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-logo svg {
+      fill: var(--colors-primary);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--spacing-xxl);
+    }
+
+    /* Welcome Section */
+    .welcome-card {
+      background: linear-gradient(135deg, var(--colors-ink-deep) 0%, #172a35 100%);
+      color: var(--colors-canvas);
+      border-radius: var(--rounded-xxxl);
+      padding: var(--spacing-xxxl);
+      margin-bottom: var(--spacing-xxl);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 20px 0px;
+    }
+
+    .welcome-card h1 {
+      color: var(--colors-canvas);
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-base);
+    }
+
+    .welcome-card p {
+      color: var(--colors-stone);
+      font-size: 16px;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    /* Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-xxl);
+    }
+
+    /* Stock Card */
+    .stock-card {
+      background-color: var(--colors-canvas);
+      border-radius: var(--rounded-xxxl);
+      border: 1px solid var(--colors-hairline-soft);
+      padding: var(--spacing-xxl);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: rgba(20, 22, 26, 0.04) 0px 1px 4px 0px;
+      transition: transform 0.3s cubic-bezier(0.2, 1, 0.2, 1), box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .stock-card:hover {
+      transform: translateY(-8px);
+      box-shadow: rgba(20, 22, 26, 0.12) 0px 12px 24px 0px;
+      border-color: var(--colors-primary-soft);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-base);
+    }
+
+    .stock-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stock-ticker {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--colors-steel);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stock-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--colors-ink-deep);
+      margin-top: var(--spacing-xxs);
+    }
+
+    .decision-badge {
+      background-color: var(--colors-success);
+      color: var(--colors-canvas);
+      padding: 6px var(--spacing-base);
+      border-radius: var(--rounded-full);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .price-large {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--colors-ink-deep);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* Quick Specs */
+    .quick-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-md);
+      background-color: var(--colors-surface-soft);
+      padding: var(--spacing-base);
+      border-radius: var(--rounded-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .spec-val {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--colors-ink-deep);
+    }
+
+    .spec-lbl {
+      font-size: 11px;
+      color: var(--colors-steel);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .btn-view-report {
+      background-color: var(--colors-primary);
+      color: var(--colors-canvas);
+      padding: 14px 28px;
+      border-radius: var(--rounded-full);
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      width: 100%;
+      text-align: center;
+      font-family: var(--font-display);
+      transition: background-color 0.2s;
+    }
+
+    .stock-card:hover .btn-view-report {
+      background-color: var(--colors-primary-deep);
+    }
+
+    /* Overall Info Region */
+    .overview-row {
+      background-color: var(--colors-canvas);
+      border-radius: var(--rounded-xxxl);
+      padding: var(--spacing-xxl);
+      border: 1px solid var(--colors-hairline-soft);
+      margin-bottom: var(--spacing-xxl);
+    }
+
+    .overview-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-base);
+      color: var(--colors-ink-deep);
+    }
+
+    .overview-desc {
+      font-size: 15px;
+      color: var(--colors-charcoal);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--colors-canvas);
+      border-top: 1px solid var(--colors-hairline-soft);
+      padding: var(--spacing-xxl) var(--spacing-xxl);
+      text-align: center;
+      font-size: 12px;
+      color: var(--colors-stone);
+      margin-top: var(--spacing-section);
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .welcome-card h1 {
+        font-size: 28px;
+      }
+      .container {
+        padding: var(--spacing-base);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="meta-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+        TradingAgents Portal
+      </div>
+    </div>
+    <div class="nav-right">
+      <span style="font-size:12px; font-weight:700; color:var(--colors-steel); font-family:var(--font-display);">VER 0.3.0</span>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Welcome Header Box -->
+    <div class="welcome-card">
+      <h1>AI 멀티에이전트 투자 포탈</h1>
+      <p>
+        정박사님을 보좌하는 충성스러운 비서 에이전트들의 종합 의사결정 대시보드입니다. <br>
+        실시간 구글 한글 뉴스 피드와 네이버 금융 KRX 메이저 자금 수급 통계(기관/외인) 분석 지표를 연동하여 최고의 팩트 기반 판단을 제공합니다.
+      </p>
+    </div>
+
+    <!-- 포트폴리오 요약 -->
+    <div class="overview-row">
+      <h2 class="overview-title">🔍 반도체 세그먼트 포지션 요약</h2>
+      <p class="overview-desc">
+        • <strong>삼성전자(005930.KS)</strong> 및 <strong>SK하이닉스(000660.KS)</strong> 두 종목 모두 실적 성장률 폭발 대비 극심한 저평가 구간에 머물러 있어 <strong>Overweight (비중 확대)</strong> 매수 제안을 받았습니다. <br>
+        • 다만 단기 기술 지표 상 데드크로스와 외인의 거센 차익 실현 매도 물량이 하방 압력으로 대항 중이므로, 즉각적인 추격 매수보다는 <strong>50일 이동평균선 지지 여부를 보거나 하락 조정을 틈탄 분할 매수</strong>로 평단가를 낮춰 대응하시는 것을 적극 추천드립니다.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Samsung Card -->
+      <div class="stock-card" onclick="location.href='samsung_analysis_report.html'">
+        <div>
+          <div class="card-top">
+            <div class="stock-info">
+              <span class="stock-ticker">005930.KS / KOSPI</span>
+              <span class="stock-name">삼성전자</span>
+            </div>
+            <span class="decision-badge">🟢 OVERWEIGHT</span>
+          </div>
+          <div class="price-large">334,000 KRW</div>
+          
+          <div class="quick-specs-grid">
+            <div class="spec-item">
+              <span class="spec-val" style="color: var(--colors-success);">4.24배</span>
+              <span class="spec-lbl">Forward PE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val">18.86%</span>
+              <span class="spec-lbl">ROE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val">42.75%</span>
+              <span class="spec-lbl">영업이익률</span>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-view-report">상세 분석 리포트 보기</button>
+      </div>
+
+      <!-- SK Hynix Card -->
+      <div class="stock-card" onclick="location.href='sk_hynix_analysis_report.html'">
+        <div>
+          <div class="card-top">
+            <div class="stock-info">
+              <span class="stock-ticker">000660.KS / KOSPI</span>
+              <span class="stock-name">SK하이닉스</span>
+            </div>
+            <span class="decision-badge">🟢 OVERWEIGHT</span>
+          </div>
+          <div class="price-large">2,650,000 KRW</div>
+          
+          <div class="quick-specs-grid">
+            <div class="spec-item">
+              <span class="spec-val" style="color: var(--colors-success);">4.91배</span>
+              <span class="spec-lbl">Forward PE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val" style="color: var(--colors-success);">61.17%</span>
+              <span class="spec-lbl">ROE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val">71.50%</span>
+              <span class="spec-lbl">영업이익률</span>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-view-report">상세 분석 리포트 보기</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    © 2026 TradingAgents Framework. 본 정보는 AI 분석 리서치용으로 제공되며, 투자의 법적 최종 책임은 전적으로 본인에게 있습니다.
+  </footer>
+
+</body>
+</html>
