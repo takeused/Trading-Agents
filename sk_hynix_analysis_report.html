@@ -345,7 +345,7 @@
     }
 
     .open .accordion-content {
-      max-height: 800px;
+      max-height: 1200px;
     }
 
     /* Bull/Bear Grid */
@@ -395,6 +395,7 @@
       position: relative;
       padding-left: 20px;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .case-list li::before {
@@ -561,7 +562,7 @@
 
   <div class="promo-banner">
     <span>💡 <strong>알림:</strong> 한글 뉴스 피드 및 실시간 KRX 투자자별 수급 데이터(기관/외인 동향)가 분석에 반영되었습니다.</span>
-    <a href="../index.html">포탈 대시보드로 가기</a>
+    <a href="index.html">포탈 대시보드로 가기</a>
   </div>
 
   <header class="top-nav">
@@ -582,7 +583,7 @@
     </div>
 
     <div class="nav-right">
-      <button class="btn-secondary" onclick="location.href='../index.html'">목록으로</button>
+      <button class="btn-secondary" onclick="location.href='index.html'">목록으로</button>
     </div>
   </header>
 
@@ -695,15 +696,15 @@
       <section class="card-feature" id="agents-card">
         <h2 class="card-title">에이전트별 분석 요약</h2>
         <div class="accordion-group">
-          <div class="accordion-item id="tech-accord" onclick="this.classList.toggle('open')">
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
             <div class="accordion-header">
               <span class="accordion-title">1️⃣ 기술적 분석가 (Technical Analyst) - HOLD</span>
               <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
             </div>
             <div class="accordion-content">
               <div class="accordion-inner">
-                <p>• 현재가(2,650,000원)는 10일 EMA(2,668,540원)를 밑돌며 단기 저항 국면에 있습니다.</p>
-                <p>• MACD 데드크로스가 났으나, 50 SMA(2,136,800원) 및 200 SMA(1,291,152원)는 강력한 장기 우상향을 가리키고 있습니다. RSI는 58.75로 과열 영역에서 벗어나 중립 영역에 정착했습니다.</p>
+                <p>• <strong>단기 지항 돌파 지연:</strong> 현재가 2,650,000원은 10일 EMA(2,668,540원)를 밑돌며 단기 저항 국면에 직면해 있습니다. MACD 지표에서 데드크로스가 나며 단기적인 하락 관성이 주가를 누르고 있고, 일봉 볼린저 밴드 중심선 부근에서 횡보하는 형태입니다.</p>
+                <p>• <strong>확고한 장기 지지력:</strong> 그러나 RSI는 58.75로 과열 영역을 해소하고 안정적으로 복귀했습니다. 특히 중기 이평선인 50일 SMA(2,136,800원)와 장기 지지선인 200일 SMA(1,291,152원)가 가파르게 동반 우상향하고 있어 가격 조정을 매력적인 진입 통로로 활용해야 합니다.</p>
               </div>
             </div>
           </div>
@@ -715,7 +716,8 @@
             </div>
             <div class="accordion-content">
               <div class="accordion-inner">
-                <p>• HBM 시장 지배력 지속과 실적 기대 보도가 지속적으로 나오고 있으며 마이크론 등 타사의 가세 우려가 대치하고 있습니다.</p>
+                <p>• <strong>AI 모멘텀 보도 우세:</strong> 엔비디아향 HBM3e 12단 제품 선점 및 차세대 HBM4 선단 리더십 유지 관련 보도가 언론을 지배하고 있으며, 미국 ADR 시장 상장 소문 등 글로벌 인지도 향상 감성이 긍정적으로 파싱되었습니다.</p>
+                <p>• <strong>경쟁 노이즈 대립:</strong> 반면, 경쟁사들의 HBM 제품군 진입 본격화 및 단가 인하 경쟁 촉발 우려 기사가 일부 보도되어 시장의 단기 센티먼트는 균형을 탐색하고 있습니다.</p>
               </div>
             </div>
           </div>
@@ -727,7 +729,8 @@
             </div>
             <div class="accordion-content">
               <div class="accordion-inner">
-                <p>• 영업이익률 71.5% 및 ROE 61.17%의 초인적인 재무 스코어를 갖췄음에도 PE 4.9배라는 극단적 저평가로 거래되고 있습니다. 부채비율 13%의 초건전 구조입니다.</p>
+                <p>• <strong>극강의 이익 마진:</strong> 전무후무한 영업이익률 71.50%와 ROE 61.17%라는 신의 스탯을 증명하고 있습니다. 이는 선단 공정 전환 및 HBM 단가 선점 효과에 기인합니다. 26.3조 원의 막강한 영업 현금 창출과 FCF TTM 25.8조 원이 이를 정량적으로 보증합니다.</p>
+                <p>• <strong>압도적 밸류에이션 괴리:</strong> 현재 Forward PE는 4.91배에 기형적으로 머물러 있으며, 부채비율은 13.28%, 유동비율 2.62배로 위기 요인이 사실상 무방비로 통제되고 있습니다. 이 밸류에이션은 단순 저평가를 넘어 시장의 실책에 가까운 안전 마진을 제공합니다.</p>
               </div>
             </div>
           </div>
@@ -741,15 +744,17 @@
           <div class="case-card bull">
             <div class="case-header bull-text">긍정적 요인 (Bull Case)</div>
             <ul class="case-list">
-              <li><strong>압도적인 이익률:</strong> HBM3e/4 시장의 사실상 독점적 마진(영익률 71.5%) 확보로 막강한 현금 실탄 지속 확보.</li>
-              <li><strong>P/E 4.9배 메리트:</strong> 업계 평균의 절반 이하 수준으로 방치된 절대적 주가 안전 마진.</li>
+              <li><strong>엔비디아 HBM 독점적 단가 협상력 유지:</strong> 차세대 'Rubin' 칩 셋 규격인 HBM4에서도 선제 협력을 공고히 하여 영업이익률 70%대 장기 유지 및 메모리 시장 패러다임 주도.</li>
+              <li><strong>TSMC 파운드리 동맹 시너지:</strong> 선단 패키징(CoWoS) 동맹을 통해 미국계 빅테크 커스텀(맞춤형) HBM 시장을 100% 장악하며 경쟁사 대비 확실한 멀티플 우위 확립.</li>
+              <li><strong>미국 ADR 상장 본격화:</strong> 미국 예탁증서 공식 상장 추진 시, 글로벌 유동자금 유입에 힘입은 밸류에이션 리레이팅 폭등 랠리 개시.</li>
             </ul>
           </div>
           <div class="case-card bear">
             <div class="case-header bear-text">리스크 요인 (Bear Case)</div>
             <ul class="case-list">
-              <li><strong>높은 변동성:</strong> 베타(2.03)가 매우 커 매크로 지수 충격 시 타 종목 대비 급격한 낙폭 동반 가능성.</li>
-              <li><strong>외인 대량 매도세:</strong> 단기 차익 실현과 환율 변동에 연계된 외국인 패시브 자금 매도 진정 여부 모니터링 요망.</li>
+              <li><strong>경쟁사의 수율 안정화:</strong> 삼성전자 및 마이크론의 HBM3e 12단 수율 안정화가 가속되어 단가 경쟁 돌입 시, 단기 영업이익률의 피크아웃 우려 직면.</li>
+              <li><strong>고베타(2.03) 변동성:</strong> 높은 베타 지표 탓에 글로벌 거시 경제(환율 격변, 경기 둔화) 노이즈 발생 시 타 IT 종목 대비 주가 낙폭 과대 우려 상존.</li>
+              <li><strong>설비투자(CAPEX) 과부하:</strong> 매년 10조 원 이상의 대규모 투자 집행 중 업황이 예상보다 빠르게 하락 반전할 시 고정비용 증가 리스크.</li>
             </ul>
           </div>
         </div>
@@ -783,7 +788,7 @@
           <span class="detail-val" style="color:var(--colors-critical);">최근 저점 대비 2~3% 하단</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">포트폴리오 비중</span>
+          <span class="detail-label">포지션 비중</span>
           <span class="detail-val">5% ~ 10% 수준 목표</span>
         </div>
         <button class="btn-buy-cta" onclick="alert('포트폴리오에 SK하이닉스 매수 비중을 반영했습니다! 🚀')">포트폴리오 추가</button>
