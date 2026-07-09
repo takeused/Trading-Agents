@@ -13,7 +13,18 @@ from tradingagents.agents.utils.agent_utils import (
 def create_fundamentals_analyst(llm):
     def fundamentals_analyst_node(state):
         current_date = state["trade_date"]
+        ticker = state["company_of_interest"]
         instrument_context = get_instrument_context_from_state(state)
+
+        # 한국 주식 여부 감지
+        is_korean = ticker.endswith('.KS') or ticker.endswith('.KQ') or (len(ticker) == 6 and ticker.isdigit())
+        krx_flow_block = ""
+        if is_korean:
+            try:
+                from tradingagents.dataflows.krx_flow import fetch_krx_investor_flow
+                krx_flow_block = fetch_krx_investor_flow(ticker, current_date)
+            except Exception as e:
+                krx_flow_block = f"KRX 수급 데이터 수집 실패: {e}"
 
         tools = [
             get_fundamentals,
@@ -24,9 +35,20 @@ def create_fundamentals_analyst(llm):
 
         system_message = (
             "You are a researcher tasked with analyzing fundamental information over the past week about a company. Please write a comprehensive report of the company's fundamental information such as financial documents, company profile, basic company financials, and company financial history to gain a full view of the company's fundamental information to inform traders. Make sure to include as much detail as possible. Provide specific, actionable insights with supporting evidence to help traders make informed decisions."
-            + " Make sure to append a Markdown table at the end of the report to organize key points in the report, organized and easy to read."
+        )
+        
+        if is_korean and krx_flow_block:
+            system_message += (
+                "\n\n### IMPORTANT: KOREAN STOCK SPECIFIC DATA (INVESTOR FLOW)\n"
+                "Draw insights on major buyer groups (Institution, Foreigner, Individual) below:\n"
+                f"{krx_flow_block}\n"
+                "Please analyze how the net purchases by foreign and institutional investors support or conflict with the fundamental valuation (e.g. low PE, PEG). Add this analysis directly to your report and the final summary table."
+            )
+            
+        system_message += (
+            " Make sure to append a Markdown table at the end of the report to organize key points in the report, organized and easy to read."
             + " Use the available tools: `get_fundamentals` for comprehensive company analysis, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for specific financial statements."
-            + get_language_instruction(),
+            + get_language_instruction()
         )
 
         prompt = ChatPromptTemplate.from_messages(

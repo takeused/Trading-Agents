@@ -63,12 +63,22 @@ def create_sentiment_analyst(llm):
         start_date = _seven_days_back(end_date)
         instrument_context = get_instrument_context_from_state(state)
 
+        # 한국 주식 여부 감지 (접미사 .KS, .KQ 또는 6자리 숫자)
+        is_korean = ticker.endswith('.KS') or ticker.endswith('.KQ') or (len(ticker) == 6 and ticker.isdigit())
+
         # Pre-fetch all three sources. Each fetcher degrades gracefully and
         # returns a string (no exceptions surface from here), so the LLM
         # always sees something — either real data or a clear placeholder.
         news_block = get_news.func(ticker, start_date, end_date)
-        stocktwits_block = fetch_stocktwits_messages(ticker, limit=30)
-        reddit_block = fetch_reddit_posts(ticker)
+        
+        if is_korean:
+            from tradingagents.dataflows.naver_finance import fetch_naver_news
+            korean_news_block = fetch_naver_news(ticker)
+            stocktwits_block = f"[한국 주식 대체 데이터 - 네이버 실시간 뉴스 및 시장 분위기]\n{korean_news_block}"
+            reddit_block = "[한국 주식 대체 데이터] 국내 종목은 해외 소셜 미디어(Reddit) 대신 한글 뉴스 및 국내 증시 시장 반응 데이터로 대체 분석합니다."
+        else:
+            stocktwits_block = fetch_stocktwits_messages(ticker, limit=30)
+            reddit_block = fetch_reddit_posts(ticker)
 
         system_message = _build_system_message(
             ticker=ticker,

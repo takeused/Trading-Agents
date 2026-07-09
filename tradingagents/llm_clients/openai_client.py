@@ -33,7 +33,25 @@ class NormalizedChatOpenAI(ChatOpenAI):
     """
 
     def invoke(self, input, config=None, **kwargs):
-        return normalize_content(super().invoke(input, config, **kwargs))
+        import time
+        import logging
+        from openai import RateLimitError
+        
+        max_retries = 3
+        delay = 3.0
+        
+        for attempt in range(max_retries):
+            try:
+                return normalize_content(super().invoke(input, config, **kwargs))
+            except RateLimitError as e:
+                if attempt == max_retries - 1:
+                    raise e
+                logging.getLogger(__name__).warning(
+                    "OpenAI-compatible LLM RateLimit (429) hit. Waiting %.1fs before retry (Attempt %d/%d)",
+                    delay, attempt + 1, max_retries
+                )
+                time.sleep(delay)
+                delay *= 2
 
     def with_structured_output(self, schema, *, method=None, **kwargs):
         caps = get_capabilities(self.model_name)
