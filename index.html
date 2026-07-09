@@ -375,15 +375,17 @@
       <button class="filter-pill" onclick="applyStockFilter('samsung', event)">삼성전자</button>
       <button class="filter-pill" onclick="applyStockFilter('hynix', event)">SK하이닉스</button>
       <button class="filter-pill" onclick="applyStockFilter('classys', event)">클래시스</button>
+      <button class="filter-pill" onclick="applyStockFilter('kb', event)">KB금융</button>
     </div>
 
     <!-- 포트폴리오 요약 -->
     <div class="overview-row">
-      <h2 class="overview-title">🔍 반도체 & 의료기기 세그먼트 포지션 요약</h2>
+      <h2 class="overview-title">🔍 반도체 & 의료기기 & 금융 세그먼트 포지션 요약</h2>
       <p class="overview-desc">
-        • <strong>삼성전자</strong>, <strong>SK하이닉스</strong>, <strong>클래시스</strong> 세 종목 모두 실적 성장률 대비 현저한 과매도 및 밸류에이션 저평가 구간에 속해 있어 <strong>Overweight (비중 확대)</strong> 결정을 획득했습니다. <br>
+        • <strong>삼성전자</strong>, <strong>SK하이닉스</strong>, <strong>클래시스</strong>, <strong>KB금융</strong> 네 종목 모두 실적 성장성과 밸류에이션 저평가 매력이 돋보여 <strong>Overweight (비중 확대)</strong> 결정을 획득했습니다. <br>
         • 반도체 대형주는 단기 데드크로스와 외인의 차익 매도세가 강력한 하방 압력으로 작용 중이므로 <strong>50일 이동평균선(삼성전자 29.1만 원 선, SK하이닉스 213.6만 원 선) 부근의 분할 매수</strong>로 조심히 진입하는 방안을 제안합니다. <br>
-        • 미용 의료기기 1위 <strong>클래시스</strong>는 고마진(영업이익률 42%) 및 바닥권 기술적 골든크로스가 포착되어 현재가(4.6만 원 대) 부근에서 **5~7% 비중으로 공격적인 분할 진입**이 유효한 상태입니다.
+        • 미용 의료기기 1위 <strong>클래시스</strong>는 고마진(영업이익률 42%) 및 바닥권 기술적 골든크로스가 포착되어 현재가(4.6만 원 대) 부근에서 **5~7% 비중으로 공격적인 분할 진입**이 유효한 상태입니다. <br>
+        • 금융 대장주인 <strong>KB금융</strong>은 자사주 소각 로드맵과 밸류업 프로그램 최대 수혜로 외인/기관 쌍끌이 순매수가 강력히 들어오고 있으며, 현재가(15.9만 원 선) 부근에서 <strong>8~10% 비중으로 편입</strong>하기에 매우 매력적입니다.
       </p>
     </div>
 
@@ -476,6 +478,37 @@
             <div class="spec-item">
               <span class="spec-val">42.67%</span>
               <span class="spec-lbl">영업이익률</span>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-view-report">상세 분석 리포트 보기</button>
+      </div>
+
+      <!-- KB Financial Card -->
+      <div class="stock-card" data-stock="kb" onclick="location.href='kb_financial_analysis_report.html'">
+        <div>
+          <div class="card-top">
+            <div class="stock-info">
+              <span class="stock-ticker">105560.KS / KOSPI</span>
+              <span class="stock-name">KB금융</span>
+            </div>
+            <span class="decision-badge">🟢 OVERWEIGHT</span>
+          </div>
+          <div class="price-large">159,000 KRW</div>
+          
+          <div class="quick-specs-grid">
+            <div class="spec-item">
+              <span class="spec-val" style="color: var(--colors-success);">7.20배</span>
+              <span class="spec-lbl">Forward PE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val" style="color: var(--colors-success);">13.94%</span>
+              <span class="spec-lbl">ROE</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-val">39.30%</span>
+              <span class="spec-lbl">CIR(비용비율)</span>
             </div>
           </div>
         </div>
