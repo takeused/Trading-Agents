@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>휴메딕스(200670.KQ) AI 멀티에이전트 분석 리포트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --colors-canvas: #ffffff;
+      --colors-surface-soft: #f5f7f8;
+      --colors-primary: #004bff;
+      --colors-primary-deep: #0038c7;
+      --colors-primary-soft: rgba(0, 75, 255, 0.15);
+      --colors-meta-link: #0064e0;
+
+      --colors-ink-deep: #0a1317;
+      --colors-ink: #1c2b33;
+      --colors-charcoal: #2a3c46;
+      --colors-slate: #5b6b73;
+      --colors-steel: #8a969c;
+      --colors-stone: #b0b8bc;
+
+      --colors-hairline: rgba(10, 19, 23, 0.15);
+      --colors-hairline-soft: rgba(10, 19, 23, 0.08);
+
+      --colors-success: #008060;
+      --colors-attention: #ffc400;
+      --colors-warning: #ffd200;
+      --colors-critical: #e11900;
+
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+
+      --rounded-sm: 4px;
+      --rounded-md: 6px;
+      --rounded-lg: 8px;
+      --rounded-xl: 16px;
+      --rounded-xxl: 24px;
+      --rounded-xxxl: 32px;
+      --rounded-full: 100px;
+
+      --spacing-xxs: 4px;
+      --spacing-xs: 8px;
+      --spacing-md: 12px;
+      --spacing-base: 16px;
+      --spacing-lg: 20px;
+      --spacing-xl: 24px;
+      --spacing-xxl: 32px;
+      --spacing-xxxl: 40px;
+      --spacing-section-sm: 48px;
+      --spacing-section: 64px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--colors-canvas);
+      color: var(--colors-ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      color: var(--colors-ink-deep);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    a { color: var(--colors-meta-link); text-decoration: none; }
+
+    .top-nav {
+      position: sticky; top: 0; height: 64px;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--colors-hairline-soft);
+      z-index: 100; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 var(--spacing-xxl);
+    }
+
+    .meta-logo {
+      font-family: var(--font-display); font-weight: 700; font-size: 18px;
+      letter-spacing: 0.05em; color: var(--colors-ink-deep);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-logo svg { fill: var(--colors-primary); }
+
+    .category-pills { display: flex; gap: var(--spacing-xs); }
+    .pill-tab {
+      background-color: var(--colors-canvas); color: var(--colors-ink);
+      border: 1px solid var(--colors-hairline); padding: 8px 16px;
+      border-radius: var(--rounded-full); font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: var(--font-display);
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .pill-tab.active {
+      background-color: var(--colors-ink-deep); color: var(--colors-canvas);
+      border-color: var(--colors-ink-deep);
+    }
+
+    .promo-banner {
+      background-color: var(--colors-ink-deep); color: var(--colors-canvas);
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      padding: var(--spacing-md) var(--spacing-xl); text-align: center;
+      display: flex; justify-content: center; align-items: center; gap: 12px;
+    }
+    .promo-banner a { color: var(--colors-warning); text-decoration: underline; }
+
+    .hero-band {
+      padding: var(--spacing-section) var(--spacing-xxl);
+      max-width: 1280px; margin: 0 auto; text-align: center;
+    }
+    .badge-decision {
+      background-color: var(--colors-success); color: var(--colors-canvas);
+      padding: 6px var(--spacing-base); border-radius: var(--rounded-full);
+      font-family: var(--font-display); font-weight: 700; font-size: 12px;
+      text-transform: uppercase;
+    }
+    .hero-display {
+      font-size: 56px; font-weight: 500; line-height: 1.16;
+      margin: var(--spacing-base) 0; color: var(--colors-ink-deep);
+    }
+    .hero-subtitle {
+      font-size: 18px; font-weight: 300; color: var(--colors-slate);
+      margin-bottom: var(--spacing-xxl); max-width: 640px;
+      margin-left: auto; margin-right: auto;
+    }
+    .btn-primary {
+      background-color: var(--colors-ink-deep); color: var(--colors-canvas);
+      padding: 14px 30px; border-radius: var(--rounded-full);
+      font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+    }
+
+    .main-container {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 var(--spacing-xxl) var(--spacing-section);
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: var(--spacing-xxxl); align-items: start;
+    }
+    .content-rail { display: flex; flex-direction: column; gap: var(--spacing-section-sm); }
+    .card-feature {
+      background-color: var(--colors-canvas); border-radius: var(--rounded-xxxl);
+      padding: var(--spacing-xxl); border: 1px solid var(--colors-hairline-soft);
+    }
+    .card-title {
+      font-size: 28px; font-weight: 500; margin-bottom: var(--spacing-xl);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .specs-table { width: 100%; border-collapse: collapse; }
+    .specs-table tr { border-bottom: 1px solid var(--colors-hairline-soft); }
+    .specs-table tr:last-child { border-bottom: none; }
+    .specs-table td, .specs-table th { padding: var(--spacing-base) 0; font-size: 14px; }
+    .specs-label { font-weight: 700; color: var(--colors-ink-deep); width: 240px; }
+    .specs-value { color: var(--colors-charcoal); }
+    .highlight-green { color: var(--colors-success); font-weight: 700; }
+    .highlight-amber { color: #b7791f; font-weight: 700; }
+
+    .accordion-group { display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .accordion-item {
+      border: 1px solid var(--colors-hairline-soft); border-radius: var(--rounded-xl);
+      overflow: hidden; background-color: var(--colors-canvas);
+    }
+    .accordion-header {
+      padding: var(--spacing-lg) var(--spacing-xl); display: flex;
+      justify-content: space-between; align-items: center; cursor: pointer; user-select: none;
+    }
+    .accordion-title { font-size: 18px; font-weight: 700; }
+    .accordion-chevron { width: 20px; height: 20px; fill: var(--colors-steel); transition: transform 0.25s; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .accordion-inner {
+      padding: 0 var(--spacing-xl) var(--spacing-xl); font-size: 15px;
+      color: var(--colors-ink); border-top: 1px solid var(--colors-hairline-soft);
+      padding-top: var(--spacing-base);
+    }
+    .accordion-inner p { margin-bottom: var(--spacing-md); }
+    .open .accordion-chevron { transform: rotate(180deg); }
+    .open .accordion-content { max-height: 1400px; }
+
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); }
+    .case-card { border-radius: var(--rounded-xxl); padding: var(--spacing-xl); }
+    .case-card.bull { background-color: rgba(0, 128, 96, 0.05); border: 1px solid rgba(0, 128, 96, 0.15); }
+    .case-card.bear { background-color: rgba(225, 25, 0, 0.05); border: 1px solid rgba(225, 25, 0, 0.15); }
+    .case-header { font-weight: 700; font-size: 18px; margin-bottom: var(--spacing-base); }
+    .case-header.bull-text { color: var(--colors-success); }
+    .case-header.bear-text { color: var(--colors-critical); }
+    .case-list { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-md); }
+    .case-list li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.5; }
+    .case-list li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+    .case-card.bull .case-list li::before { color: var(--colors-success); }
+    .case-card.bear .case-list li::before { color: var(--colors-critical); }
+
+    .sticky-rail { position: sticky; top: 96px; }
+    .card-checkout-summary {
+      background-color: var(--colors-canvas); border-radius: var(--rounded-xl);
+      padding: var(--spacing-xl); border: 1px solid var(--colors-hairline-soft);
+      box-shadow: rgba(20, 22, 26, 0.12) 0px 1px 6px 0px;
+    }
+    .summary-eyebrow {
+      font-size: 12px; font-weight: 700; color: var(--colors-steel);
+      text-transform: uppercase; margin-bottom: var(--spacing-xxs);
+    }
+    .summary-title { font-size: 24px; font-weight: 700; }
+    .summary-price { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: var(--spacing-lg); }
+    .summary-divider { height: 1px; background-color: var(--colors-hairline-soft); margin: var(--spacing-base) 0; }
+    .options-group-title { font-size: 12px; font-weight: 700; color: var(--colors-steel); text-transform: uppercase; margin-bottom: var(--spacing-xs); }
+    .radio-option {
+      background-color: var(--colors-canvas); border-radius: var(--rounded-lg);
+      padding: var(--spacing-base); border: 2px solid var(--colors-success);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .radio-title { font-weight: 700; font-size: 14px; }
+    .radio-subtitle { font-size: 12px; color: var(--colors-steel); }
+    .radio-badge { background-color: var(--colors-success); color: var(--colors-canvas); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: var(--rounded-full); }
+    .detail-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: var(--spacing-xs); }
+    .detail-label { color: var(--colors-slate); }
+    .detail-val { font-weight: 700; }
+    .btn-buy-cta {
+      background-color: var(--colors-primary); color: var(--colors-canvas);
+      padding: 16px 30px; border-radius: var(--rounded-full); font-size: 14px;
+      font-weight: 700; border: none; width: 100%; cursor: pointer; margin-top: var(--spacing-base);
+    }
+
+    .mobile-checkout-bar {
+      position: fixed; bottom: 0; left: 0; width: 100%; height: 72px;
+      background-color: var(--colors-canvas); border-top: 1px solid var(--colors-hairline-soft);
+      box-shadow: rgba(20, 22, 26, 0.15) 0px -2px 10px 0px; display: none;
+      align-items: center; justify-content: space-between; padding: 0 var(--spacing-xl); z-index: 99;
+    }
+    .btn-mobile-buy { background-color: var(--colors-primary); color: var(--colors-canvas); border: none; padding: 10px 24px; border-radius: var(--rounded-full); font-size: 13px; font-weight: 700; cursor: pointer; }
+
+    @media (max-width: 1024px) {
+      .main-container { grid-template-columns: 1fr; }
+      .sticky-rail { position: static; }
+    }
+    @media (max-width: 768px) {
+      body { padding-bottom: 72px; }
+      .category-pills, .sticky-rail { display: none; }
+      .mobile-checkout-bar { display: flex; }
+      .case-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-banner">
+    <span>💡 <strong>알림:</strong> 한글 뉴스 피드 및 실시간 KRX 투자자별 수급 데이터(기관/외인 동향)가 분석에 반영되었습니다.</span>
+    <a href="../../index.html">포탈 대시보드로 가기</a>
+  </div>
+
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="meta-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+        TradingAgents
+      </div>
+    </div>
+    <div class="category-pills">
+      <button class="pill-tab active" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">종합 분석</button>
+      <button class="pill-tab" onclick="document.getElementById('krx-flow-card').scrollIntoView({behavior: 'smooth'})">수급 분석</button>
+      <button class="pill-tab" onclick="document.getElementById('agents-card').scrollIntoView({behavior: 'smooth'})">에이전트별</button>
+      <button class="pill-tab" onclick="document.getElementById('bullbear-section').scrollIntoView({behavior: 'smooth'})">B/B Case</button>
+    </div>
+    <div class="nav-right">
+      <button class="pill-tab" onclick="location.href='../../index.html'">목록으로</button>
+    </div>
+  </header>
+
+  <section class="hero-band">
+    <div class="badge-wrap">
+      <span class="badge-decision">🟢 OVERWEIGHT (비중 확대)</span>
+    </div>
+    <h1 class="hero-display">휴메딕스 (200670.KQ)</h1>
+    <p class="hero-subtitle">
+      Forward PE 6.6배·배당 4.2%·시총 42% 현금이라는 '방패'와 AI 뷰티 디바이스·중앙아시아 확장이라는 '창'.<br>
+      기관 5일 연속 순매수 + 외국인 합류로 수급 반전. 점진적 비중 확대 전략 유효.
+    </p>
+  </section>
+
+  <main class="main-container">
+
+    <div class="content-rail">
+
+      <!-- 펀더멘털 카드 -->
+      <section class="card-feature" id="fundamental-card">
+        <h2 class="card-title">펀더멘털 분석 (Fundamentals)</h2>
+        <table class="specs-table">
+          <tr>
+            <td class="specs-label">Forward PE</td>
+            <td class="specs-value highlight-green">6.60배 (🟢 극심한 저평가 구간)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">배당수익률 (Dividend Yield)</td>
+            <td class="specs-value highlight-green">4.16% (🟢 하방 지지 배당)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">영업이익률 (Operating Margin)</td>
+            <td class="specs-value highlight-green">15.38% (🟢 견조한 수익 구조)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">ROE (자기자본이익률)</td>
+            <td class="specs-value highlight-amber">7.26% (🟡 양호하나 폭발적이지 않음)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">부채비율 (Debt to Equity)</td>
+            <td class="specs-value highlight-green">23.06% (🟢 재무 리스크 거의 없음)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">유동비율 (Current Ratio)</td>
+            <td class="specs-value highlight-green">3.06배 (🟢 단기 지급 능력 탁월)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">현금성 자산</td>
+            <td class="specs-value highlight-green">약 1,253억 원 (🟢 시총의 ~42%, 강한 하방 경직성)</td>
+          </tr>
+          <tr>
+            <td class="specs-label">시가총액 / Beta / 52주 범위</td>
+            <td class="specs-value">약 2,986억 원 / 0.344 / 23,800 ~ 77,200원</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- 수급 테이블 -->
+      <section class="card-feature" id="krx-flow-card">
+        <h2 class="card-title">KRX 투자자별 수급 분석</h2>
+        <table class="specs-table">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--colors-ink-deep);">
+              <th align="left">날짜</th>
+              <th align="center">종가 (원)</th>
+              <th align="center">기관 순매매 (주)</th>
+              <th align="center">외국인 순매매 (주)</th>
+              <th align="center">특이사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="specs-label" style="font-weight:normal;">2026-07-10</td>
+              <td align="center">26,900</td>
+              <td align="center" class="specs-value highlight-green">+7,539</td>
+              <td align="center" class="specs-value highlight-green">+11,475</td>
+              <td align="center" style="font-size:13px;">쌍끌이 매수 전환</td>
+            </tr>
+            <tr>
+              <td class="specs-label" style="font-weight:normal;">2026-07-09</td>
+              <td align="center">25,900</td>
+              <td align="center" class="specs-value highlight-green">+7,640</td>
+              <td align="center" class="specs-value" style="color:var(--colors-critical);">-12,860</td>
+              <td align="center" style="font-size:13px;">기관 매수 지속</td>
+            </tr>
+            <tr>
+              <td class="specs-label" style="font-weight:normal;">2026-07-08</td>
+              <td align="center">26,450</td>
+              <td align="center" class="specs-value highlight-green">+6,805</td>
+              <td align="center" class="specs-value" style="color:var(--colors-critical);">-911</td>
+              <td align="center" style="font-size:13px;">기관 매수 지속</td>
+            </tr>
+            <tr>
+              <td class="specs-label" style="font-weight:normal;">2026-07-07</td>
+              <td align="center">26,450</td>
+              <td align="center" class="specs-value highlight-green">+6,729</td>
+              <td align="center" class="specs-value" style="color:var(--colors-critical);">-1,855</td>
+              <td align="center" style="font-size:13px;">기관 매수 지속</td>
+            </tr>
+            <tr>
+              <td class="specs-label" style="font-weight:normal;">2026-07-06</td>
+              <td align="center">27,050</td>
+              <td align="center" class="specs-value highlight-green">+7,619</td>
+              <td align="center" class="specs-value" style="color:var(--colors-critical);">-4,698</td>
+              <td align="center" style="font-size:13px;">기관 매수 지속</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--colors-slate); margin-top: var(--spacing-base);">
+          💡 <strong>수급 결론</strong>: 기관이 5거래일 연속 순매수로 하방 지지선을 형성한 데 이어, 7/10 외국인이 대규모 순매수로 전환하며 '쌍끌이 매수' 양상. Forward PE 6.6배 극심한 저평가 구간에서의 기관·외인 동시 매수는 시장이 현재 주가를 '강한 저평가·과매도 구간'으로 인식함을 시사합니다.
+        </p>
+      </section>
+
+      <!-- 에이전트별 분석 -->
+      <section class="card-feature" id="agents-card">
+        <h2 class="card-title">에이전트별 분석 요약</h2>
+        <div class="accordion-group">
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">1️⃣ 기술적 분석가 (Technical Analyst) - HOLD</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>• <strong>장기 약세 속 바닥 다지기:</strong> 현재가(26,900원)는 200일 SMA(39,396원)와 50일 SMA(28,978원)를 크게 하회하는 전형적 약세 구조입니다. 다만 10일 EMA(26,697원)를 상회하며 25,000원 후반~27,000원 좁은 박스권에서 바닥을 다지고 있으며, 52주 최저점(23,800원) 부근에서 회복을 시도 중입니다.</p>
+                <p>• <strong>MACD 골든크로스 태동:</strong> MACD 값(-563.32)은 0선 아래이나, 히스토그램이 <strong>+124.86으로 양수 전환</strong>되고 MACD선이 시그널선(-688.18)을 상회하는 골든크로스 형태로 단기 반전 가능성이 제기됩니다. RSI 47.71 중립, 볼린저 밴드 하단(25,118원) 지지 후 중심선(26,995원)까지 회복. 단, 50·200일선 저항이 위에 포진해 단순 반등에 그칠 위험도 상존합니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">2️⃣ 감성 분석가 (Sentiment Analyst) - Mildly Bullish 6.2/10</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>• <strong>글로벌 확장 이벤트 집중:</strong> 7/10 'HART 글로벌 프로그램' 개최, 러시아·카자흐스탄 의료진 초청, 에스테틱 기술력 소개 등 글로벌 확장 보도 집중. 7/8 <strong>AI 기반 피부미용 디바이스 사업 MOU</strong> 체결로 사업 다각화 기대감 형성.</p>
+                <p>• <strong>기관 우려 병존:</strong> 반면 6/29 한국투자증권이 영업이익 추정치 하향으로 <strong>목표가 25% 하향</strong> 조정. 'K-에스테틱 글로벌 확장 + AI 뷰티 디바이스'가 지배 내러티브이나, 이벤트 종료 후 모멘텀 소멸·실적 둔화 우려가 리스크로 병존합니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">3️⃣ 뉴스 분석가 (News Analyst) - Hold/Wait</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>• <strong>개별 모멘텀 부재:</strong> 최근 1주일(07-03~07-10) 휴메딕스 관련 직접 공시·뉴스 없음. 개별 호재 확인 전까지 시장 전체 흐름(베타)에 연동될 가능성이 큽니다.</p>
+                <p>• <strong>고금리 매크로 부담:</strong> 예측 시장 기준 2026년 내 금리 인하가 없을 확률 <strong>78%</strong>. 자본 조달 비용이 중요한 헬스케어/제약 섹터에 밸류에이션 하방 압력. 금리 민감 섹터 특성상 보수적 접근 권고.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">4️⃣ 펀더멘털 분석가 (Fundamentals Analyst) - 매수 관점</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>• <strong>가치주 매력:</strong> Forward PE 6.6배는 업종 평균 대비 매우 낮고, 시총의 상당 부분을 현금(1,253억 원)이 차지해 안전마진이 확보됩니다. 부채비율 23%·유동비율 3.06배로 금리 인상기·경기 침체기에도 견딜 재무 구조. TTM 매출 약 1,110억 원, 1분기 매출 405억·영업이익 89억 원으로 견조합니다.</p>
+                <p>• <strong>성장 정체 리스크:</strong> 매출 성장세가 폭발적이지 않고, 52주 최고점(77,200원) 대비 크게 하락한 상태라 회복에 시간이 걸릴 수 있습니다. 낮은 베타(0.344)로 급등보다 완만한 회복이 예상됩니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 시나리오 분석 -->
+      <section class="card-feature" id="bullbear-section">
+        <h2 class="card-title">시나리오 분석 (Bull & Bear Case)</h2>
+        <div class="case-grid">
+          <div class="case-card bull">
+            <div class="case-header bull-text">긍정적 요인 (Bull Case)</div>
+            <ul class="case-list">
+              <li><strong>가치+현금+배당의 삼중 방패:</strong> Forward PE 6.6배 극심한 저평가, 시총의 ~42%에 달하는 현금성 자산(1,253억 원), 4.16% 배당수익률이 하방 리스크를 강하게 제한.</li>
+              <li><strong>수급 반전 트리거:</strong> 기관 5일 연속 순매수에 외국인이 7/10 대규모 매수로 합류. MACD 골든크로스 태동과 겹쳐 단기 반등의 강력한 트리거가 될 수 있음.</li>
+              <li><strong>성장 '창'의 가시화:</strong> AI 기반 피부미용 디바이스 MOU와 중앙아시아(러시아·카자흐스탄) 시장 확대가 기존 HA 필러 사업 외 신규 성장 엔진으로 부상.</li>
+            </ul>
+          </div>
+          <div class="case-card bear">
+            <div class="case-header bear-text">리스크 요인 (Bear Case)</div>
+            <ul class="case-list">
+              <li><strong>강력한 이평선 저항:</strong> 50일 SMA(28,978원)·200일 SMA(39,396원)가 위에 포진해, 단순 기술적 반등에 그치고 저항대에서 재차 눌릴 위험.</li>
+              <li><strong>실적 둔화·목표가 하향:</strong> 6/29 한국투자증권의 영업이익 추정치 하향 및 목표가 25% 하향은 펀더멘털 우려를 반영. 매출 성장 정체가 회복을 지연시킬 수 있음.</li>
+              <li><strong>고금리 매크로:</strong> 금리 인하 지연(78% 동결 전망)은 금리 민감 헬스케어 섹터의 밸류에이션에 하방 압력. 낮은 베타로 급격한 상승 탄력은 제한적.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Right Summary Rail -->
+    <aside class="sticky-rail">
+      <div class="card-checkout-summary">
+        <div class="summary-eyebrow">휴메딕스 / 200670.KQ · KOSDAQ</div>
+        <h3 class="summary-title">Humedix Co.</h3>
+        <div class="summary-price">26,900 KRW</div>
+        <div class="summary-divider"></div>
+        <div class="options-group-title">추천 결론</div>
+        <div class="radio-option">
+          <div class="radio-option-info">
+            <span class="radio-title">비중 확대 권고</span>
+            <span class="radio-subtitle">점진적(단계적) 매수 접근</span>
+          </div>
+          <span class="radio-badge">OVERWEIGHT</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="options-group-title">가이드라인</div>
+        <div class="detail-row">
+          <span class="detail-label">진입 전략</span>
+          <span class="detail-val">현재가 정찰 → 50일선 돌파 증량</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">목표가</span>
+          <span class="detail-val" style="color:var(--colors-success);">35,000 ~ 38,000 원</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">스톱로스</span>
+          <span class="detail-val" style="color:var(--colors-critical);">24,000 원</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">포지션 비중</span>
+          <span class="detail-val">2~3% / 헬스케어 5% 이하</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">투자 기간</span>
+          <span class="detail-val">3~6개월</span>
+        </div>
+        <button class="btn-buy-cta" onclick="alert('휴메딕스 점진적 비중 확대(Overweight) 전략을 반영했습니다! 🚀')">포트폴리오 추가</button>
+      </div>
+    </aside>
+
+  </main>
+
+  <div class="mobile-checkout-bar">
+    <div>
+      <div style="font-size:11px; color:var(--colors-success); font-weight:700;">🟢 OVERWEIGHT</div>
+      <div style="font-family:var(--font-display); font-size:18px; font-weight:700;">26,900 원</div>
+    </div>
+    <button class="btn-mobile-buy" onclick="alert('포트폴리오 추가 성공! 🚀')">포트폴리오 추가</button>
+  </div>
+
+</body>
+</html>

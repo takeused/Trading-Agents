@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,38 @@
   <!-- Montserrat and Noto Sans KR -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
   <style>
     /* Meta Commerce Design System Tokens */
     :root {
       --colors-canvas: #ffffff;
       --colors-surface-soft: #f5f7f8;
-      --colors-primary: #004bff; 
-      --colors-primary-deep: #0038c7; 
+      --colors-primary: #004bff;
+      --colors-primary-deep: #0038c7;
       --colors-primary-soft: rgba(0, 75, 255, 0.08);
       --colors-meta-link: #0064e0;
-      
+
       --colors-ink-deep: #0a1317;
       --colors-ink: #1c2b33;
       --colors-charcoal: #2a3c46;
       --colors-slate: #5b6b73;
       --colors-steel: #8a969c;
       --colors-stone: #b0b8bc;
-      
+
       --colors-hairline: rgba(10, 19, 23, 0.15);
       --colors-hairline-soft: rgba(10, 19, 23, 0.08);
-      
+
       --colors-success: #008060;
       --colors-attention: #ffc400;
       --colors-warning: #ffd200;
       --colors-critical: #e11900;
-      
+
       --font-display: 'Montserrat', sans-serif;
       --font-body: 'Noto Sans KR', sans-serif;
-      
+
       --rounded-xs: 2px;
       --rounded-sm: 4px;
       --rounded-md: 6px;
@@ -45,7 +48,7 @@
       --rounded-xxl: 24px;
       --rounded-xxxl: 32px;
       --rounded-full: 100px;
-      
+
       --spacing-xxs: 4px;
       --spacing-xs: 8px;
       --spacing-md: 12px;
@@ -73,7 +76,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
       font-family: var(--font-display);
       color: var(--colors-ink-deep);
       font-variant-numeric: tabular-nums;
@@ -206,6 +212,10 @@
       font-size: 11px;
     }
 
+    .decision-badge.underweight {
+      background-color: var(--colors-critical);
+    }
+
     .price-large {
       font-family: var(--font-display);
       font-size: 36px;
@@ -318,6 +328,45 @@
       background-color: var(--colors-surface-soft);
     }
 
+    /* Date Selector Toolbar */
+    .date-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-base);
+      flex-wrap: wrap;
+    }
+
+    .date-toolbar-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--colors-ink-deep);
+    }
+
+    .date-select {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--colors-ink-deep);
+      background-color: var(--colors-canvas);
+      border: 1px solid var(--colors-hairline);
+      border-radius: var(--rounded-full);
+      padding: 10px 18px;
+      cursor: pointer;
+    }
+
+    .date-select:focus {
+      outline: none;
+      border-color: var(--colors-primary);
+      box-shadow: 0 0 0 3px var(--colors-primary-soft);
+    }
+
+    .date-meta {
+      font-size: 13px;
+      color: var(--colors-slate);
+    }
+
     /* Footer */
     .footer {
       background-color: var(--colors-canvas);
@@ -333,33 +382,38 @@
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
+
       .welcome-card h1 {
         font-size: 28px;
       }
+
       .container {
         padding: var(--spacing-base);
       }
     }
   </style>
 </head>
+
 <body>
 
   <header class="top-nav">
     <div class="nav-left">
       <div class="meta-logo">
         <svg width="24" height="24" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
         </svg>
         TradingAgents Portal
       </div>
     </div>
     <div class="nav-right">
-      <span style="font-size:12px; font-weight:700; color:var(--colors-steel); font-family:var(--font-display);">VER 0.3.0</span>
+      <span style="font-size:12px; font-weight:700; color:var(--colors-steel); font-family:var(--font-display);">VER
+        0.3.0</span>
     </div>
   </header>
 
   <div class="container">
-    
+
     <!-- Welcome Header Box -->
     <div class="welcome-card">
       <h1>AI 멀티에이전트 투자 포탈</h1>
@@ -369,153 +423,24 @@
       </p>
     </div>
 
-    <!-- Stock Filter Pills -->
-    <div class="filter-wrapper">
-      <button class="filter-pill active" onclick="applyStockFilter('all', event)">전체 종목</button>
-      <button class="filter-pill" onclick="applyStockFilter('samsung', event)">삼성전자</button>
-      <button class="filter-pill" onclick="applyStockFilter('hynix', event)">SK하이닉스</button>
-      <button class="filter-pill" onclick="applyStockFilter('classys', event)">클래시스</button>
-      <button class="filter-pill" onclick="applyStockFilter('kb', event)">KB금융</button>
+    <!-- Date Selector Toolbar -->
+    <div class="date-toolbar">
+      <label class="date-toolbar-label" for="dateSelect">분석 기준일</label>
+      <select id="dateSelect" class="date-select" onchange="renderDate(this.value)"></select>
+      <span id="dateMeta" class="date-meta"></span>
     </div>
 
-    <!-- 포트폴리오 요약 -->
+    <!-- Stock Filter Pills (날짜별 동적 생성) -->
+    <div class="filter-wrapper" id="stockFilter"></div>
+
+    <!-- 포트폴리오 요약 (날짜별 동적) -->
     <div class="overview-row">
-      <h2 class="overview-title">🔍 반도체 & 의료기기 & 금융 세그먼트 포지션 요약</h2>
-      <p class="overview-desc">
-        • <strong>삼성전자</strong>, <strong>SK하이닉스</strong>, <strong>클래시스</strong>, <strong>KB금융</strong> 네 종목 모두 실적 성장성과 밸류에이션 저평가 매력이 돋보여 <strong>Overweight (비중 확대)</strong> 결정을 획득했습니다. <br>
-        • 반도체 대형주는 단기 데드크로스와 외인의 차익 매도세가 강력한 하방 압력으로 작용 중이므로 <strong>50일 이동평균선(삼성전자 29.1만 원 선, SK하이닉스 213.6만 원 선) 부근의 분할 매수</strong>로 조심히 진입하는 방안을 제안합니다. <br>
-        • 미용 의료기기 1위 <strong>클래시스</strong>는 고마진(영업이익률 42%) 및 바닥권 기술적 골든크로스가 포착되어 현재가(4.6만 원 대) 부근에서 **5~7% 비중으로 공격적인 분할 진입**이 유효한 상태입니다. <br>
-        • 금융 대장주인 <strong>KB금융</strong>은 자사주 소각 로드맵과 밸류업 프로그램 최대 수혜로 외인/기관 쌍끌이 순매수가 강력히 들어오고 있으며, 현재가(15.9만 원 선) 부근에서 <strong>8~10% 비중으로 편입</strong>하기에 매우 매력적입니다.
-      </p>
+      <h2 class="overview-title" id="overviewTitle"></h2>
+      <p class="overview-desc" id="overviewDesc"></p>
     </div>
 
-    <!-- Cards Grid -->
-    <div class="dashboard-grid">
-      
-      <!-- Samsung Card -->
-      <div class="stock-card" data-stock="samsung" onclick="location.href='samsung_analysis_report.html'">
-        <div>
-          <div class="card-top">
-            <div class="stock-info">
-              <span class="stock-ticker">005930.KS / KOSPI</span>
-              <span class="stock-name">삼성전자</span>
-            </div>
-            <span class="decision-badge">🟢 OVERWEIGHT</span>
-          </div>
-          <div class="price-large">334,000 KRW</div>
-          
-          <div class="quick-specs-grid">
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">4.24배</span>
-              <span class="spec-lbl">Forward PE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val">18.86%</span>
-              <span class="spec-lbl">ROE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val">42.75%</span>
-              <span class="spec-lbl">영업이익률</span>
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn-view-report">상세 분석 리포트 보기</button>
-      </div>
-
-      <!-- SK Hynix Card -->
-      <div class="stock-card" data-stock="hynix" onclick="location.href='sk_hynix_analysis_report.html'">
-        <div>
-          <div class="card-top">
-            <div class="stock-info">
-              <span class="stock-ticker">000660.KS / KOSPI</span>
-              <span class="stock-name">SK하이닉스</span>
-            </div>
-            <span class="decision-badge">🟢 OVERWEIGHT</span>
-          </div>
-          <div class="price-large">2,650,000 KRW</div>
-          
-          <div class="quick-specs-grid">
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">4.91배</span>
-              <span class="spec-lbl">Forward PE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">61.17%</span>
-              <span class="spec-lbl">ROE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val">71.50%</span>
-              <span class="spec-lbl">영업이익률</span>
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn-view-report">상세 분석 리포트 보기</button>
-      </div>
-
-      <!-- Classys Card -->
-      <div class="stock-card" data-stock="classys" onclick="location.href='classys_analysis_report.html'">
-        <div>
-          <div class="card-top">
-            <div class="stock-info">
-              <span class="stock-ticker">214150.KQ / KOSDAQ</span>
-              <span class="stock-name">클래시스</span>
-            </div>
-            <span class="decision-badge">🟢 OVERWEIGHT</span>
-          </div>
-          <div class="price-large">46,600 KRW</div>
-          
-          <div class="quick-specs-grid">
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">14.14배</span>
-              <span class="spec-lbl">Forward PE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">27.19%</span>
-              <span class="spec-lbl">ROE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val">42.67%</span>
-              <span class="spec-lbl">영업이익률</span>
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn-view-report">상세 분석 리포트 보기</button>
-      </div>
-
-      <!-- KB Financial Card -->
-      <div class="stock-card" data-stock="kb" onclick="location.href='kb_financial_analysis_report.html'">
-        <div>
-          <div class="card-top">
-            <div class="stock-info">
-              <span class="stock-ticker">105560.KS / KOSPI</span>
-              <span class="stock-name">KB금융</span>
-            </div>
-            <span class="decision-badge">🟢 OVERWEIGHT</span>
-          </div>
-          <div class="price-large">159,000 KRW</div>
-          
-          <div class="quick-specs-grid">
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">7.20배</span>
-              <span class="spec-lbl">Forward PE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val" style="color: var(--colors-success);">13.94%</span>
-              <span class="spec-lbl">ROE</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-val">39.30%</span>
-              <span class="spec-lbl">CIR(비용비율)</span>
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn-view-report">상세 분석 리포트 보기</button>
-      </div>
-
+    <!-- Cards Grid (날짜별 동적) -->
+    <div class="dashboard-grid" id="cardsGrid">
     </div>
 
   </div>
@@ -524,25 +449,97 @@
     © 2026 TradingAgents Framework. 본 정보는 AI 분석 리서치용으로 제공되며, 투자의 법적 최종 책임은 전적으로 본인에게 있습니다.
   </footer>
 
+  <!-- 날짜별 리포트 메타데이터 (file:// 오프라인에서도 script src로 로드됨) -->
+  <script src="reports/data.js"></script>
   <script>
-    function applyStockFilter(stock, event) {
-      // Remove active class from all filter pills
-      document.querySelectorAll('.filter-pill').forEach(btn => {
-        btn.classList.remove('active');
+    (function () {
+      var D = window.TA_DATA || { reports: [], overviews: {} };
+
+      // 기준일 목록 (최신순)
+      var dates = Array.from(new Set(D.reports.map(function (r) { return r.date; })))
+        .sort().reverse();
+
+      var sel = document.getElementById('dateSelect');
+      dates.forEach(function (d) {
+        var o = document.createElement('option');
+        o.value = d; o.textContent = d;
+        sel.appendChild(o);
       });
-      
-      // Add active class to clicked pill
-      event.currentTarget.classList.add('active');
-      
-      // Filter cards
-      document.querySelectorAll('.stock-card').forEach(card => {
-        if (stock === 'all' || card.getAttribute('data-stock') === stock) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
+
+      function mkPill(text, active) {
+        var b = document.createElement('button');
+        b.className = 'filter-pill' + (active ? ' active' : '');
+        b.textContent = text;
+        return b;
+      }
+
+      function setActive(btn) {
+        document.querySelectorAll('#stockFilter .filter-pill')
+          .forEach(function (x) { x.classList.remove('active'); });
+        btn.classList.add('active');
+      }
+
+      function filterCards(key) {
+        document.querySelectorAll('#cardsGrid .stock-card').forEach(function (c) {
+          c.style.display = (key === 'all' || c.getAttribute('data-stock') === key) ? 'flex' : 'none';
+        });
+      }
+
+      function mkCard(r) {
+        var isUnder = r.decision === 'UNDERWEIGHT';
+        var emoji = isUnder ? '🔴' : '🟢';
+        var specsHtml = r.specs.map(function (s) {
+          return '<div class="spec-item">' +
+            '<span class="spec-val"' + (s.hl ? ' style="color: var(--colors-success);"' : '') + '>' + s.val + '</span>' +
+            '<span class="spec-lbl">' + s.lbl + '</span></div>';
+        }).join('');
+        var card = document.createElement('div');
+        card.className = 'stock-card';
+        card.setAttribute('data-stock', r.key);
+        card.onclick = function () { location.href = r.href; };
+        card.innerHTML =
+          '<div><div class="card-top"><div class="stock-info">' +
+            '<span class="stock-ticker">' + r.ticker + ' / ' + r.exchange + '</span>' +
+            '<span class="stock-name">' + r.name + '</span></div>' +
+            '<span class="decision-badge' + (isUnder ? ' underweight' : '') + '">' + emoji + ' ' + r.decision + '</span>' +
+          '</div>' +
+          '<div class="price-large">' + r.price + '</div>' +
+          '<div class="quick-specs-grid">' + specsHtml + '</div></div>' +
+          '<button class="btn-view-report">상세 분석 리포트 보기</button>';
+        return card;
+      }
+
+      window.renderDate = function (date) {
+        var items = D.reports.filter(function (r) { return r.date === date; });
+
+        document.getElementById('dateMeta').textContent = '· ' + items.length + '개 종목 분석';
+        document.getElementById('overviewTitle').textContent = '🔍 ' + date + ' 기준 포지션 요약';
+        document.getElementById('overviewDesc').innerHTML = D.overviews[date] || '';
+
+        var grid = document.getElementById('cardsGrid');
+        grid.innerHTML = '';
+        items.forEach(function (r) { grid.appendChild(mkCard(r)); });
+
+        var fw = document.getElementById('stockFilter');
+        fw.innerHTML = '';
+        var allBtn = mkPill('전체 종목', true);
+        allBtn.onclick = function () { setActive(allBtn); filterCards('all'); };
+        fw.appendChild(allBtn);
+        items.forEach(function (r) {
+          var b = mkPill(r.name, false);
+          b.onclick = function () { setActive(b); filterCards(r.key); };
+          fw.appendChild(b);
+        });
+
+        filterCards('all');
+      };
+
+      if (dates.length) {
+        sel.value = dates[0];
+        window.renderDate(dates[0]);
+      }
+    })();
   </script>
 </body>
+
 </html>
