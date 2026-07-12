@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KB금융(105560.KS) AI 멀티에이전트 분석 리포트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --colors-canvas: #ffffff;
+      --colors-surface-soft: #f5f7f8;
+      --colors-primary: #004bff;
+      --colors-primary-deep: #0038c7;
+      --colors-primary-soft: rgba(0, 75, 255, 0.15);
+      --colors-meta-link: #0064e0;
+
+      --colors-ink-deep: #0a1317;
+      --colors-ink: #1c2b33;
+      --colors-charcoal: #2a3c46;
+      --colors-slate: #5b6b73;
+      --colors-steel: #8a969c;
+      --colors-stone: #b0b8bc;
+
+      --colors-hairline: rgba(10, 19, 23, 0.15);
+      --colors-hairline-soft: rgba(10, 19, 23, 0.08);
+
+      --colors-success: #008060;
+      --colors-attention: #ffc400;
+      --colors-warning: #ffd200;
+      --colors-critical: #e11900;
+
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+
+      --rounded-sm: 4px;
+      --rounded-md: 6px;
+      --rounded-lg: 8px;
+      --rounded-xl: 16px;
+      --rounded-xxl: 24px;
+      --rounded-xxxl: 32px;
+      --rounded-full: 100px;
+
+      --spacing-xxs: 4px;
+      --spacing-xs: 8px;
+      --spacing-md: 12px;
+      --spacing-base: 16px;
+      --spacing-lg: 20px;
+      --spacing-xl: 24px;
+      --spacing-xxl: 32px;
+      --spacing-xxxl: 40px;
+      --spacing-section-sm: 48px;
+      --spacing-section: 64px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--colors-canvas);
+      color: var(--colors-ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      color: var(--colors-ink-deep);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    a { color: var(--colors-meta-link); text-decoration: none; }
+
+    .top-nav {
+      position: sticky; top: 0; height: 64px;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--colors-hairline-soft);
+      z-index: 100; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 var(--spacing-xxl);
+    }
+
+    .meta-logo {
+      font-family: var(--font-display); font-weight: 700; font-size: 18px;
+      letter-spacing: 0.05em; color: var(--colors-ink-deep);
+      display: flex; align-items: center; gap: 6px;
+      cursor: pointer;
+    }
+    .meta-logo svg { fill: var(--colors-primary); }
+
+    .top-nav-right { display: flex; align-items: center; gap: var(--spacing-base); }
+    .btn-nav-back {
+      background: none; border: 1px solid var(--colors-hairline);
+      padding: 8px 16px; border-radius: var(--rounded-full);
+      font-weight: 500; font-size: 14px; cursor: pointer;
+      color: var(--colors-charcoal); transition: all 0.2s;
+    }
+    .btn-nav-back:hover {
+      background-color: var(--colors-surface-soft);
+      border-color: var(--colors-ink-deep);
+    }
+
+    .promo-banner {
+      background-color: var(--colors-surface-soft);
+      padding: var(--spacing-xxl) var(--spacing-xxl);
+      border-bottom: 1px solid var(--colors-hairline-soft);
+      display: flex; flex-direction: column; gap: var(--spacing-xs);
+    }
+    .banner-meta {
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      color: var(--colors-slate); letter-spacing: 0.05em;
+    }
+    .banner-title { font-size: 32px; font-weight: 700; color: var(--colors-ink-deep); }
+    .banner-subtitle { font-size: 16px; color: var(--colors-slate); }
+
+    .main-layout {
+      display: grid; grid-template-columns: 1fr 340px;
+      max-width: 1200px; margin: 0 auto;
+      padding: var(--spacing-xxl) var(--spacing-xxl);
+      gap: var(--spacing-xxxl);
+    }
+
+    .content-area { display: flex; flex-direction: column; gap: var(--spacing-section-sm); }
+
+    .card-feature {
+      background: var(--colors-canvas);
+      display: flex; flex-direction: column; gap: var(--spacing-base);
+    }
+    .card-title {
+      font-size: 20px; font-weight: 700; color: var(--colors-ink-deep);
+      border-bottom: 2px solid var(--colors-ink-deep);
+      padding-bottom: var(--spacing-xs);
+    }
+
+    /* Accordion */
+    .accordion-group { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+    .accordion-item {
+      border: 1px solid var(--colors-hairline-soft);
+      border-radius: var(--rounded-lg); overflow: hidden;
+      background-color: var(--colors-canvas); transition: border-color 0.2s;
+    }
+    .accordion-item:hover { border-color: var(--colors-hairline); }
+    .accordion-header {
+      padding: var(--spacing-base); display: flex; justify-content: space-between;
+      align-items: center; cursor: pointer; background-color: var(--colors-surface-soft);
+      user-select: none;
+    }
+    .accordion-title { font-size: 16px; font-weight: 700; color: var(--colors-ink-deep); }
+    .accordion-chevron {
+      width: 20px; height: 20px; fill: var(--colors-slate);
+      transition: transform 0.2s;
+    }
+    .accordion-content {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 1000px; transition: max-height 0.5s ease-in;
+    }
+    .accordion-item.open .accordion-chevron { transform: rotate(180deg); }
+    .accordion-inner {
+      padding: var(--spacing-base); border-top: 1px solid var(--colors-hairline-soft);
+      display: flex; flex-direction: column; gap: var(--spacing-xs);
+      font-size: 15px; color: var(--colors-charcoal);
+    }
+    .accordion-inner p { margin-bottom: 6px; line-height: 1.6; }
+    .accordion-inner ul { padding-left: 20px; margin-bottom: 8px; }
+    .accordion-inner li { margin-bottom: 6px; line-height: 1.5; }
+
+    /* Tables */
+    .info-table {
+      width: 100%; border-collapse: collapse; margin-top: var(--spacing-xs);
+      font-size: 14px;
+    }
+    .info-table th, .info-table td {
+      padding: 10px 12px; text-align: left;
+      border-bottom: 1px solid var(--colors-hairline-soft);
+    }
+    .info-table th {
+      background-color: var(--colors-surface-soft);
+      color: var(--colors-slate); font-weight: 700;
+    }
+    .info-table td { color: var(--colors-charcoal); }
+
+    /* Case Analysis */
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-base); }
+    .case-card {
+      border: 1px solid var(--colors-hairline-soft);
+      border-radius: var(--rounded-lg); padding: var(--spacing-base);
+    }
+    .case-card.bull { border-left: 4px solid var(--colors-success); }
+    .case-card.bear { border-left: 4px solid var(--colors-critical); }
+    .case-header { font-weight: 700; font-size: 15px; margin-bottom: var(--spacing-xs); }
+    .bull-text { color: var(--colors-success); }
+    .bear-text { color: var(--colors-critical); }
+    .case-list { list-style-type: none; padding-left: 0; }
+    .case-list li {
+      font-size: 14px; color: var(--colors-charcoal); margin-bottom: 8px;
+      line-height: 1.5; position: relative; padding-left: 14px;
+    }
+    .case-list li::before {
+      content: "•"; position: absolute; left: 0; color: var(--colors-slate);
+    }
+
+    /* Sticky Rail */
+    .sticky-rail { position: relative; }
+    .card-checkout-summary {
+      position: sticky; top: 88px;
+      border: 1px solid var(--colors-hairline);
+      border-radius: var(--rounded-xl); padding: var(--spacing-xl);
+      background-color: var(--colors-canvas);
+      display: flex; flex-direction: column; gap: var(--spacing-base);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .summary-eyebrow {
+      font-family: var(--font-display); font-weight: 700; font-size: 11px;
+      color: var(--colors-slate); letter-spacing: 0.05em;
+    }
+    .summary-title { font-size: 22px; font-weight: 700; color: var(--colors-ink-deep); }
+    .summary-price { font-size: 24px; font-weight: 700; color: var(--colors-ink-deep); font-family: var(--font-display); }
+    .summary-divider { height: 1px; background-color: var(--colors-hairline-soft); }
+    
+    .options-group-title {
+      font-size: 12px; font-weight: 700; color: var(--colors-slate);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .radio-option {
+      border: 1px solid var(--colors-primary);
+      border-radius: var(--rounded-md); padding: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      background-color: var(--colors-primary-soft);
+    }
+    .radio-option-info { display: flex; flex-direction: column; gap: 2px; }
+    .radio-title { font-size: 14px; font-weight: 700; color: var(--colors-primary-deep); }
+    .radio-subtitle { font-size: 11px; color: var(--colors-slate); }
+    .radio-badge {
+      background-color: var(--colors-success); color: white;
+      font-size: 10px; font-weight: 700; padding: 4px 8px;
+      border-radius: var(--rounded-full); font-family: var(--font-display);
+    }
+
+    .detail-row { display: flex; justify-content: space-between; font-size: 13px; }
+    .detail-label { color: var(--colors-slate); }
+    .detail-val { font-weight: 700; color: var(--colors-ink-deep); text-align: right; }
+
+    .btn-buy-cta {
+      background-color: var(--colors-primary); color: white;
+      border: none; padding: var(--spacing-base) var(--spacing-base);
+      border-radius: var(--rounded-md); font-weight: 700; font-size: 15px;
+      cursor: pointer; transition: background-color 0.2s;
+    }
+    .btn-buy-cta:hover { background-color: var(--colors-primary-deep); }
+
+    /* Mobile Checkout Bar */
+    .mobile-checkout-bar {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      background-color: var(--colors-canvas);
+      border-top: 1px solid var(--colors-hairline);
+      padding: var(--spacing-base) var(--spacing-base);
+      justify-content: space-between; align-items: center; z-index: 100;
+    }
+    .btn-mobile-buy {
+      background-color: var(--colors-primary); color: white;
+      border: none; padding: 10px 20px; border-radius: var(--rounded-md);
+      font-weight: 700; font-size: 14px; cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .main-layout { grid-template-columns: 1fr; padding-bottom: 90px; }
+      .sticky-rail { display: none; }
+      .mobile-checkout-bar { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 네비게이션 -->
+  <nav class="top-nav">
+    <div class="meta-logo" onclick="location.href='../../index.html'">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+      </svg>
+      TradingAgents
+    </div>
+    <div class="top-nav-right">
+      <button class="btn-nav-back" onclick="location.href='../../index.html'">목록으로 돌아가기</button>
+    </div>
+  </nav>
+
+  <!-- 메인 배너 -->
+  <header class="promo-banner">
+    <span class="banner-meta">AI MULTI-AGENT GENERAL ANALYSIS REPORT</span>
+    <h1 class="banner-title">KB금융 (105560.KS)</h1>
+    <p class="banner-subtitle">분석 기준일: 2026-07-10 | 시스템 버전: TradingAgents v0.3.0</p>
+  </header>
+
+  <!-- 레이아웃 -->
+  <main class="main-layout">
+    
+    <!-- 콘텐츠 -->
+    <div class="content-area">
+      
+      <!-- 최종 매매 판단 -->
+      <section class="card-feature" id="decision-section">
+        <h2 class="card-title">🎯 최종 매매 판단 및 요약</h2>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th style="width: 30%;">항목</th>
+              <th>결정 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>최종 판단 (Rating)</strong></td>
+              <td><span style="color:var(--colors-success); font-weight:700;">🟢 Overweight (비중 확대)</span></td>
+            </tr>
+            <tr>
+              <td><strong>트레이더 제안 (Action)</strong></td>
+              <td><strong>BUY (매수)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>진입 가격대 (Entry)</strong></td>
+              <td>184,400원 부근 (175,000원 ~ 180,000원 조정 시 추가 매수)</td>
+            </tr>
+            <tr>
+              <td><strong>손절 가격선 (Stop Loss)</strong></td>
+              <td>170,000원</td>
+            </tr>
+            <tr>
+              <td><strong>목표 가격대 (Target)</strong></td>
+              <td>190,000원 이상</td>
+            </tr>
+            <tr>
+              <td><strong>포지션 비중 (Sizing)</strong></td>
+              <td>10% ~ 12% (초기 5~7%)</td>
+            </tr>
+            <tr>
+              <td><strong>투자 기간 (Horizon)</strong></td>
+              <td>3-6개월</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div style="margin-top: var(--spacing-base); padding: var(--spacing-base); background-color: var(--colors-surface-soft); border-radius: var(--rounded-md); border-left: 4px solid var(--colors-primary);">
+          <strong>💡 핵심 요약 (Executive Summary):</strong><br>
+          <p style="margin-top: 6px; line-height: 1.6; font-size: 14px; color: var(--colors-charcoal);">초기 포트폴리오 비중 5~7%로 진입하고, 주가가 175,000~180,000원 조정 구간에 도달하면 추가 매수해 최종 10~12%까지 확대합니다. 손절선은 170,000원, 목표가는 190,000원이며, 고금리 지속에 따른 예대마진 방어와 적극적 자사주 매입 정책을 바탕으로 3~6개월 동안 보유를 권고합니다.</p>
+        </div>
+      </section>
+
+      <!-- 에이전트 상세 분석 -->
+      <section class="card-feature" id="analysts-section">
+        <h2 class="card-title">📊 에이전트별 상세 분석</h2>
+        <div class="accordion-group">
+          
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">1️⃣ 기술적 분석가 (Technical Analyst)</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <ul>
+  <li><strong>완벽한 정배열 지지:</strong> 50일선(159,197원)과 200일선(139,482원)이 모두 우상향 정배열을 보이며 장기 강세장을 유지하고 있습니다.</li>
+  <li><strong>상승 가속화:</strong> 종가 184,400원은 볼린저 밴드 상단(181,973원)을 상향 돌파하며 밴드 라이딩이 개시되었고, MACD 히스토그램(2,306)이 급증하며 상승 에너지가 뻗어 나가고 있습니다.</li>
+  <li><strong>단기 과매수 주의:</strong> RSI가 70.43으로 과매수 구간에 집입해 단기 숨고르기 조정을 겪을 수 있으므로 10일 EMA(169,720원) 부근 지지력을 염두에 두어야 합니다.</li>
+</ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">2️⃣ 감성 분석가 (Sentiment Analyst)</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <ul>
+  <li><strong>주주친화 행보:</strong> Zacks 리포트에서 우수한 배당 가치주로 재조명받았고, 국내 시장에서는 '20만원 고지 돌파 초읽기', '주주환원 연일 확대' 등 주가 상승 기대감이 지배적입니다.</li>
+  <li><strong>안정성과 혁신 시너지:</strong> 양종희 회장의 주도하에 AI 기반 재설계, 비은행 부문 강화 등의 혁신 정책이 시장 호평을 끌어냈습니다.</li>
+</ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">3️⃣ 뉴스 분석가 (News Analyst)</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <ul>
+  <li><strong>Higher for Longer 수혜:</strong> 연준의 2026년 금리 동결 확률 78%는 예대마진(NIM) 유지 측면에서 전통 은행주인 KB금융지주에 강한 실적 방어 장벽을 형성해 줍니다.</li>
+  <li><strong>정부 정책 시너지:</strong> 한국 정부의 '밸류업 프로그램'과 결합되어, 자사주 매입/소각 등 추가적인 주주 환원책이 주가 레벨업의 뚜렷한 촉매제로 자리 잡았습니다.</li>
+</ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" onclick="this.classList.toggle('open')">
+            <div class="accordion-header">
+              <span class="accordion-title">4️⃣ 펀더멘털 분석가 (Fundamentals Analyst)</span>
+              <svg class="accordion-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <ul>
+  <li><strong>높은 수익성과 이익 유보:</strong> 순이자이익(NII)이 분기당 3.1~3.3조 원 수준에서 탄탄하게 나오며, 유보이익이 46.4조 원으로 자본(59.3조 원) 대비 현금이 매우 풍부합니다.</li>
+  <li><strong>밸류에이션 매력:</strong> Forward PE 9.46배, PEG 0.74로 이익 성장 속도 대비 주가가 낮습니다. 하락 구간에서 기관이 5일 연속 강력 매수하고 외인도 7/10에 동반 순매수로 합류해 수급이 완벽히 일치했습니다.</li>
+</ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 시나리오 분석 -->
+      <section class="card-feature" id="bullbear-section">
+        <h2 class="card-title">시나리오 분석 (Bull & Bear Case)</h2>
+        <div class="case-grid">
+          <div class="case-card bull">
+            <div class="case-header bull-text">긍정적 요인 (Bull Case)</div>
+            <ul class="case-list">
+              <ul>
+  <li><strong>밸류업 촉매와 저평가:</strong> PEG 0.74 수준의 저평가와 지속적인 자사주 매입/소각이 합쳐져 Forward PE 10배 돌파 리레이팅 가속화 및 20만원 고지 돌파 가능성.</li>
+  <li><strong>고금리 NIM 방어:</strong> 연준 금리 인하 지연 환경 속에서 견조한 이자마진 방어와 5일 연속 기관의 강한 순매수 및 외국인의 순매수 합류 유입.</li>
+</ul>
+            </ul>
+          </div>
+          <div class="case-card bear">
+            <div class="case-header bear-text">리스크 요인 (Bear Case)</div>
+            <ul class="case-list">
+              <ul>
+  <li><strong>신용 리스크 상승:</strong> 고금리 기조 장기화로 인한 취약 차주 부실 및 대손충당금 확대 부담이 순이익 증가 속도를 제어할 가능성.</li>
+  <li><strong>단기 과매수 과열:</strong> RSI 70.4의 과열 지표 및 전고점 돌파에 따른 차익실현 매물 출회 시 10일 EMA(169,720원)까지의 일시적 눌림목 조정 가능성.</li>
+</ul>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 우측 요약 레일 -->
+    <aside class="sticky-rail">
+      <div class="card-checkout-summary">
+        <div class="summary-eyebrow">KB금융 / 105560.KS · KOSPI</div>
+        <h3 class="summary-title">KB Financial Group</h3>
+        <div class="summary-price">184,400 KRW</div>
+        <div class="summary-divider"></div>
+        <div class="options-group-title">추천 결론</div>
+        <div class="radio-option">
+          <div class="radio-option-info">
+            <span class="radio-title">비중 확대 권고</span>
+            <span class="radio-subtitle">장기 펀더멘털 기반 진입 유효</span>
+          </div>
+          <span class="radio-badge">OVERWEIGHT</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="options-group-title">가이드라인</div>
+        <div class="detail-row">
+          <span class="detail-label">목표가</span>
+          <span class="detail-val">190,000원 이상</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">진입가</span>
+          <span class="detail-val">184,400원 부근 (175,000원 ~ 180,000원 조정 시 추가 매수)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">손절가</span>
+          <span class="detail-val" style="color:var(--colors-critical);">170,000원</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">포지션 비중</span>
+          <span class="detail-val">10% ~ 12% (초기 5~7%)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">투자 기간</span>
+          <span class="detail-val">3-6개월</span>
+        </div>
+        <button class="btn-buy-cta" onclick="alert('KB금융 비중 확대(Overweight) 전략을 반영했습니다. 🟢')">비중 확대 반영</button>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- 모바일 하단바 -->
+  <div class="mobile-checkout-bar">
+    <div>
+      <div style="font-size:11px; color:var(--colors-success); font-weight:700;">🟢 OVERWEIGHT</div>
+      <div style="font-family:var(--font-display); font-size:18px; font-weight:700;">184,400 KRW</div>
+    </div>
+    <button class="btn-mobile-buy" onclick="alert('비중 확대 전략 반영! 🟢')">비중 확대 반영</button>
+  </div>
+
+  <script>
+    // Ensure at least the first accordion is open initially
+    document.querySelector('.accordion-item').classList.add('open');
+  </script>
+</body>
+</html>
