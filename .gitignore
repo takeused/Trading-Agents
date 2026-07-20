@@ -221,3 +221,9 @@ __marimo__/
 # Enterprise env file (secrets) and generated run reports
 .env.enterprise
 # reports/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
