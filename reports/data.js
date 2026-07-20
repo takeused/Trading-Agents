@@ -4,6 +4,13 @@ window.TA_DATA = {
 
   // 날짜별 포트폴리오 요약 (해당 기준일에 분석한 종목 기준)
   overviews: {
+    "2026-07-20":
+      '• <strong>[KOSPI 4%+ 급락]</strong> \'AI 거품 언와인드\' 우려로 반도체 대형주 중심의 기술적 베어마켓 진입이 확인됐습니다. 6종목 전원 기술적 지표는 악화됐으나 펀더멘털은 대부분 유지되며 종목별로 결론이 갈렸습니다. <br>' +
+      '• <strong>삼성전자</strong>(Fwd PE 3.74배)와 <strong>SK하이닉스</strong>(영업이익률 71.5%)는 단기 급락에도 극단적 저평가와 외국인 순매수를 근거로 <strong>Overweight</strong>를 유지, 볼린저 밴드 하단 부근 분할 매수가 유효합니다. <br>' +
+      '• <strong>KB금융</strong>은 단기 조정에도 장기 상승 추세와 기관 순매수세가 견고해 <strong>Overweight</strong>를 유지합니다. <br>' +
+      '• <strong>클래시스</strong>는 신임 CEO 기대감과 저평가 매력에도 2분기 어닝 쇼크와 기술적 역배열이 상충하며 <strong>Hold (관망)</strong>로 조정됐습니다. <br>' +
+      '• <strong>휴메딕스</strong>는 중국 진출 기대감에도 200일선 붕괴 수준의 기술적 하락과 수급 이탈이 겹치며 <strong style="color:var(--colors-critical);">Underweight (비중 축소)</strong>로 반전됐습니다 (07-10 Overweight → 07-20 Underweight). <br>' +
+      '• <strong>달바글로벌</strong>은 VC 오버행 해소와 피델리티·국민연금 등 장기 기관으로의 손바뀜이 확인되며 <strong>Overweight</strong>로 반전됐습니다 (07-10 Underweight → 07-20 Overweight).',
     "2026-07-10":
       '• <strong>[신규 & 업데이트]</strong> 기존 분석 4종목을 업데이트하고 소비재·헬스케어 2종목을 추가하여 총 6개 종목의 분석을 진행했습니다. <br>' +
       '• <strong>삼성전자</strong>(Fwd PE 4.38배)와 <strong>SK하이닉스</strong>(영업이익률 71.5%, 나스닥 상장 성공)는 단기 하락 조정세에도 압도적 펀더멘털과 저평가 메리트로 <strong>Overweight</strong>를 유지하며, 분할 매수 진입이 유효합니다. <br>' +
@@ -20,6 +27,30 @@ window.TA_DATA = {
 
   // 리포트 카드 (최신 날짜가 위로 오도록 배열; 같은 날짜 내 표시 순서 = 배열 순서)
   reports: [
+    { date: "2026-07-20", key: "samsung", name: "삼성전자", ticker: "005930.KS", exchange: "KOSPI",
+      price: "244,000 KRW", decision: "OVERWEIGHT", href: "reports/2026-07-20/samsung.html",
+      specs: [ {val:"3.74배",lbl:"Forward PE",hl:true}, {val:"0.18",lbl:"PEG",hl:true}, {val:"42.75%",lbl:"영업이익률",hl:false} ] },
+
+    { date: "2026-07-20", key: "hynix", name: "SK하이닉스", ticker: "000660.KS", exchange: "KOSPI",
+      price: "1,764,000 KRW", decision: "OVERWEIGHT", href: "reports/2026-07-20/sk_hynix.html",
+      specs: [ {val:"3.91배",lbl:"Forward PE",hl:true}, {val:"61.2%",lbl:"ROE",hl:true}, {val:"71.5%",lbl:"영업이익률",hl:false} ] },
+
+    { date: "2026-07-20", key: "classys", name: "클래시스", ticker: "214150.KQ", exchange: "KOSDAQ",
+      price: "43,800 KRW", decision: "HOLD", href: "reports/2026-07-20/classys.html",
+      specs: [ {val:"12.42배",lbl:"Forward PE",hl:true}, {val:"27.19%",lbl:"ROE",hl:true}, {val:"42.67%",lbl:"영업이익률",hl:false} ] },
+
+    { date: "2026-07-20", key: "kb", name: "KB금융", ticker: "105560.KS", exchange: "KOSPI",
+      price: "168,800 KRW", decision: "OVERWEIGHT", href: "reports/2026-07-20/kb_financial.html",
+      specs: [ {val:"8.58배",lbl:"Forward PE",hl:true}, {val:"9.99%",lbl:"ROE",hl:true}, {val:"36.58%",lbl:"순이익률",hl:false} ] },
+
+    { date: "2026-07-20", key: "humedix", name: "휴메딕스", ticker: "200670.KQ", exchange: "KOSDAQ",
+      price: "24,600 KRW", decision: "UNDERWEIGHT", href: "reports/2026-07-20/humedix.html",
+      specs: [ {val:"6.04배",lbl:"Forward PE",hl:true}, {val:"4.28%",lbl:"배당수익률",hl:true}, {val:"15.38%",lbl:"영업이익률",hl:false} ] },
+
+    { date: "2026-07-20", key: "dalba", name: "달바글로벌", ticker: "483650.KS", exchange: "KOSPI",
+      price: "217,000 KRW", decision: "OVERWEIGHT", href: "reports/2026-07-20/dalba.html",
+      specs: [ {val:"15.14배",lbl:"Forward PE",hl:true}, {val:"50.8%",lbl:"ROE",hl:true}, {val:"26.3%",lbl:"영업이익률",hl:false} ] },
+
     { date: "2026-07-10", key: "samsung", name: "삼성전자", ticker: "005930.KS", exchange: "KOSPI",
       price: "285,000 KRW", decision: "OVERWEIGHT", href: "reports/2026-07-10/samsung.html",
       specs: [ {val:"4.38배",lbl:"Forward PE",hl:true}, {val:"18.86%",lbl:"ROE",hl:false}, {val:"42.75%",lbl:"영업이익률",hl:false} ] },
